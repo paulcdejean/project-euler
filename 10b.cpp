@@ -4,14 +4,19 @@
 #include <numeric>
 #include <boost/iterator/counting_iterator.hpp>
 #include <boost/utility.hpp>
+#include <cmath>
+
+const int smallest_prime = 2;
+const int goal = 2000000;
+const int finish = ceil(sqrt(goal));
 
 int main () {
   std::list<int> sieve;
   std::list<int>::iterator tortoise;
   std::list<int>::iterator hare;
 
-  std::copy(boost::counting_iterator<int>(2),
-	    boost::counting_iterator<int>(2000000),
+  std::copy(boost::counting_iterator<int>(smallest_prime),
+	    boost::counting_iterator<int>(goal),
 	    std::back_inserter(sieve));
   
   tortoise = sieve.begin();  
@@ -23,7 +28,7 @@ int main () {
 	sieve.erase(boost::next(hare));
       }
     }
-    if(*tortoise > 1414) {
+    if(*tortoise > finish) {
       break;
     }
     ++tortoise;
